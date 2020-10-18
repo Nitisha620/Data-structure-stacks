@@ -1,5 +1,4 @@
-#include<iostream>
-#include<limits.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 struct queue{
@@ -78,15 +77,6 @@ int isEmptyStack(struct stack *s){
     return s->top ==-1;
 }
 
-int printQ(struct queue *q){
-    struct queue *temp = q; 
-    while(!isEmpty(temp)){
-    cout<<temp->arr[temp->front]<<" ";
-    temp->front = (temp->front+1)%temp->capacity;
-    temp->size -=1;
-    }
-}
-
 int reverseQ(struct queue *q){
     struct stack *stk = createStack(5);
     while(!isEmpty(q))
@@ -106,7 +96,13 @@ int main(){
     enQueue(q,5);
     enQueue(q,7);
     enQueue(q,9);
+    enQueue(q,11);
+    enQueue(q,13);//1,3,5,7,9,11,13
 
-    reverseQ(q);
-    printQ(q);
+    reverseQ(q);//13,11,9,7,5,3,1
+    struct queue *temp = q; 
+    while(!isEmpty(temp)){
+    cout<<temp->arr[temp->front]<<" ";
+    temp->front = (temp->front+1)%temp->capacity;
+    temp->size -=1;
 }
