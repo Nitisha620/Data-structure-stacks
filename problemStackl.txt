@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<limits.h>
+struct stack{
+    int top;
+    int capacity;
+    int *arr;
+};
+
+int isFull(struct stack *s){
+    return s->top == s->capacity-1;
+}
+
+int isEmpty(struct stack *s){
+    return s->top ==-1;    
+}
+
+int peek(struct stack *s){
+    if(isEmpty(s)){
+        printf("Stack is Empty");
+    }
+    else
+    return s->arr[s->top];
+}
+
+int size(struct stack *s){
+    return s->top +1;
+}
+
+struct stack* createStack(int capacity){
+    struct stack *stk = (struct stack*)malloc(sizeof(struct stack));
+    if(!stk)
+        return NULL;
+    stk->top = -1;
+    stk->capacity = capacity;
+    stk->arr = (int*)malloc(sizeof(capacity * sizeof(int)));
+    if(!stk->arr)
+        return NULL;
+    return stk;
+}
+
+int push(struct stack *s){
+    if(isFull(s))
+        printf("Stack is overflow");
+    else{
+        printf("Enter the element : ");
+        scanf("%d",&s->arr[++s->top]);
+    }
+}
+
+int pop(struct stack* s){
+    if(isEmpty(s))
+        printf("The stack is Empty");
+    else{
+        printf("%d is popped",s->arr[s->top--]);
+    }
+}
+
+int deleteStack(struct stack * s){
+    if(s){
+        if(s->arr){
+        free(s->arr);
+        }
+        free(s);
+    }    
+}
+
+int main(){
+    int capacity;
+    printf("Enter the capacity of a stack : ");
+    scanf("%d",&capacity);
+    
+    struct stack *stk = createStack(capacity);
+    
+    for(int i=0;i<capacity;i++){
+        push(stk);
+    }
+    
+    printf("gjhdshgj");
+    printf("The top element is %d",peek(stk));
+    printf("The size of a stack is %d",size(stk));
+    
+    for(int i=0;i<capacity-2;i++){
+        pop(stk);
+    }
+    
+    printf("The top element is %d",peek(stk));
+    printf("The size of a stack is %d",size(stk));
+    
+    deleteStack(stk);
+    
+    printf("The top element is %d",peek(stk));
+    printf("The size of a stack is %d",size(stk));
+}
